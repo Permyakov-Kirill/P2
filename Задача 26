@@ -1,0 +1,6 @@
+function summa(vec::Vector{T}, s::T=0) where T
+    if length(vec) == 0
+        return s
+    end
+    return summa(vec[1:end-1], s + vec[end])
+end
