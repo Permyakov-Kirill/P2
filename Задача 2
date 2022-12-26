@@ -1,0 +1,37 @@
+function edge_mark!(robot)
+  back_path = move_to_angle!(robot)
+  mark_external_rect!(robot)
+  move_to_back!(robot,back_path)
+end
+
+function move_to_angle!(robot)
+  return (side = Nord, num_steps = numsteps_along!(robot,Sud)),(side = Ost, num_steps = numsteps_along!(robot,West)),(side = Nord, num_steps = numsteps_along!(robot,Sud))
+end
+
+function move_to_back!(robot, back_path)
+  for next in back_path
+    along!(robot, next.side, next.num_steps)
+  end
+end
+
+function mark_external_rect!(robot)
+  for side in(Ost, Nord, West, Sud)
+    mark_along!(robot,side)
+  end
+end
+
+function mark_along!(robot,side)
+  while !isborder(robot,side)
+    move!(robot,side)
+    putmarker!(robot)
+  end
+end
+
+function numsteps_along!(robot, direct)::Int
+    num_steps = 0
+    while !isborder(robot, direct)
+        move!(robot, direct)
+        num_steps += 1
+    end
+    return num_steps
+end
