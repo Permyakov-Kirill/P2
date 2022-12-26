@@ -1,0 +1,14 @@
+using HorizonSideRobots
+
+inverse(side :: HorizonSide) = HorizonSide(mod(Int(side)+2,4))
+
+function bord_marker!(r :: Robot, side :: HorizonSide)
+  if !isborder(r, side)
+    move!(r, side)
+    bord_marker!(r, side)
+    side = inverse(side)
+    move!(r, side)
+  else isborder(r, side)
+    putmarker!(r)
+  end
+end
