@@ -1,0 +1,16 @@
+function to_symmetric_pos!(robot,side)
+  if isborder(robot,side)
+    tolim!(robot,inverse(side))
+  else
+    move!(robot,side)
+    to_symmetric_pos!(robot,side)
+    move!(robot,side)
+  end
+end
+
+function tolim!(robot,side)
+  if !isborder(robot,side)
+    move!(robot,side)
+    tolim!(robot,side)
+  end
+end
