@@ -35,3 +35,9 @@ function numsteps_along!(robot, direct)::Int
     end
     return num_steps
 end
+
+function along!(robot, direct, num_steps)::Nothing
+	for _ in 1:num_steps
+        move!(robot, direct)
+    end
+end
