@@ -1,0 +1,8 @@
+function fibonacci!(n::Integer)
+  prev = next = 1
+  while n>0
+    next, prev = prev + next, next
+    n -= 1
+  end
+  return prev
+end
